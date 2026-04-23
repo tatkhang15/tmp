@@ -19,6 +19,7 @@
       <input type="password" id="password" required autocomplete="off">
       <button type="submit">Đăng nhập</button>
     </form>
+    <a href="forgot-password.html" class="sub-link">Quên mật khẩu</a>
     <a href="register.html" class="back-button">Quay lại đăng ký</a>
   </div>
   <script>
@@ -27,13 +28,11 @@
     email = document.getElementById("email");
     pass = document.getElementById("password");
     message = document.getElementById("message");
-
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       oldUser = localStorage.getItem("username");
       oldEmail = localStorage.getItem("email");
       oldPass = localStorage.getItem("password");
-
       if (user.value == oldUser && email.value == oldEmail && pass.value == oldPass) {
         message.innerHTML = "Đăng nhập thành công";
         message.className = "message-box success";

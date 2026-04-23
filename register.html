@@ -32,7 +32,6 @@
     confirm = document.getElementById("confirm");
     message = document.getElementById("message");
     clearButton = document.getElementById("clear-button");
-
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       oldUser = localStorage.getItem("username");
@@ -59,7 +58,6 @@
         message.className = "message-box error";
         return;
       }
-
       localStorage.setItem("username", user.value);
       localStorage.setItem("email", email.value);
       localStorage.setItem("password", pass.value);
@@ -67,7 +65,6 @@
       message.className = "message-box success";
       form.reset();
     });
-
     clearButton.addEventListener("click", () => {
       localStorage.removeItem("username");
       localStorage.removeItem("email");

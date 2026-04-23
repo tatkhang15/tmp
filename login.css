@@ -76,6 +76,21 @@ button {
     color: #ffffff;
     font-weight: bold;
 }
+.sub-button {
+    background-color: #6b7280;
+}
+.sub-link {
+    display: block;
+    margin-top: 8px;
+    text-align: center;
+    color: #1f6feb;
+    text-decoration: none;
+    font-weight: bold;
+}
+.panel {
+    margin-top: 8px;
+    padding-top: 4px;
+}
 .back-button {
     display: block;
     width: 100%;
