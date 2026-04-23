@@ -10,41 +10,35 @@
   <p id="message" class="message-box hidden"></p>
   <div class="container">
     <h1>Đăng ký</h1>
-    <form id="form">
+    <form id="form" autocomplete="off">
       <label for="username">Tên đăng nhập</label>
-      <input type="text" id="username" required>
+      <input type="text" id="username" required autocomplete="off">
       <label for="email">Email</label>
-      <input type="email" id="email" required>
+      <input type="email" id="email" required autocomplete="off">
       <label for="password">Mật khẩu</label>
-      <input type="password" id="password" required>
+      <input type="password" id="password" required autocomplete="new-password">
       <label for="confirm">Nhập lại mật khẩu</label>
-      <input type="password" id="confirm" required>
+      <input type="password" id="confirm" required autocomplete="new-password">
       <button type="submit">Đăng ký</button>
     </form>
-    <p id="saved" class="hidden"></p>
     <button id="clear-button" type="button" class="clear-button">Xóa toàn bộ user</button>
     <a href="login.html" class="back-button">Quay lại đăng nhập</a>
   </div>
   <script>
-   form = document.getElementById("form");
-   user = document.getElementById("username");
-   email = document.getElementById("email");
-   pass = document.getElementById("password");
-   confirm = document.getElementById("confirm");
-   message = document.getElementById("message");
-   saved = document.getElementById("saved");
-   clearButton = document.getElementById("clear-button");
-   oldUser = localStorage.getItem("username");
-   oldEmail = localStorage.getItem("email");
-    if (oldUser && oldEmail) {
-      saved.innerHTML = "Thông tin cũ:<br>Tên đăng nhập: " + oldUser + "<br>Email: " + oldEmail;
-      saved.className = "";
-    }
+    form = document.getElementById("form");
+    user = document.getElementById("username");
+    email = document.getElementById("email");
+    pass = document.getElementById("password");
+    confirm = document.getElementById("confirm");
+    message = document.getElementById("message");
+    clearButton = document.getElementById("clear-button");
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       oldUser = localStorage.getItem("username");
       oldEmail = localStorage.getItem("email");
       oldPass = localStorage.getItem("password");
+
       if (pass.value != confirm.value) {
         message.innerHTML = "Mật khẩu nhập lại không giống nhau";
         message.className = "message-box error";
@@ -65,25 +59,21 @@
         message.className = "message-box error";
         return;
       }
+
       localStorage.setItem("username", user.value);
       localStorage.setItem("email", email.value);
       localStorage.setItem("password", pass.value);
       message.innerHTML = "Đăng ký thành công";
       message.className = "message-box success";
-      saved.innerHTML = "Thông tin mới:<br>Tên đăng nhập: " + user.value + "<br>Email: " + email.value;
-      saved.className = "";
+      form.reset();
     });
+
     clearButton.addEventListener("click", () => {
       localStorage.removeItem("username");
       localStorage.removeItem("email");
       localStorage.removeItem("password");
-      oldUser = "";
-      oldEmail = "";
-      oldPass = "";
       message.innerHTML = "Đã xóa toàn bộ user";
       message.className = "message-box success";
-      saved.innerHTML = "";
-      saved.className = "hidden";
       form.reset();
     });
   </script>
