@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký</title>
+  <link rel="stylesheet" href="register.css">
+</head>
+<body>
+  <p id="message" class="message-box hidden"></p>
+  <div class="container">
+    <h1>Đăng ký</h1>
+    <form id="form">
+      <label for="username">Tên đăng nhập</label>
+      <input type="text" id="username" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+      <label for="password">Mật khẩu</label>
+      <input type="password" id="password" required>
+      <label for="confirm">Nhập lại mật khẩu</label>
+      <input type="password" id="confirm" required>
+      <button type="submit">Đăng ký</button>
+    </form>
+    <p id="saved" class="hidden"></p>
+    <button id="clear-button" type="button" class="clear-button">Xóa toàn bộ user</button>
+    <a href="login.html" class="back-button">Quay lại đăng nhập</a>
+  </div>
+  <script>
+   form = document.getElementById("form");
+   user = document.getElementById("username");
+   email = document.getElementById("email");
+   pass = document.getElementById("password");
+   confirm = document.getElementById("confirm");
+   message = document.getElementById("message");
+   saved = document.getElementById("saved");
+   clearButton = document.getElementById("clear-button");
+   oldUser = localStorage.getItem("username");
+   oldEmail = localStorage.getItem("email");
+    if (oldUser && oldEmail) {
+      saved.innerHTML = "Thông tin cũ:<br>Tên đăng nhập: " + oldUser + "<br>Email: " + oldEmail;
+      saved.className = "";
+    }
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      oldUser = localStorage.getItem("username");
+      oldEmail = localStorage.getItem("email");
+      oldPass = localStorage.getItem("password");
+      if (pass.value != confirm.value) {
+        message.innerHTML = "Mật khẩu nhập lại không giống nhau";
+        message.className = "message-box error";
+        return;
+      }
+      if (user.value == oldUser) {
+        message.innerHTML = "Tên đăng nhập đã trùng với cái cũ";
+        message.className = "message-box error";
+        return;
+      }
+      if (email.value == oldEmail) {
+        message.innerHTML = "Email đã trùng với cái cũ";
+        message.className = "message-box error";
+        return;
+      }
+      if (pass.value == oldPass) {
+        message.innerHTML = "Mật khẩu đã trùng với cái cũ";
+        message.className = "message-box error";
+        return;
+      }
+      localStorage.setItem("username", user.value);
+      localStorage.setItem("email", email.value);
+      localStorage.setItem("password", pass.value);
+      message.innerHTML = "Đăng ký thành công";
+      message.className = "message-box success";
+      saved.innerHTML = "Thông tin mới:<br>Tên đăng nhập: " + user.value + "<br>Email: " + email.value;
+      saved.className = "";
+    });
+    clearButton.addEventListener("click", () => {
+      localStorage.removeItem("username");
+      localStorage.removeItem("email");
+      localStorage.removeItem("password");
+      oldUser = "";
+      oldEmail = "";
+      oldPass = "";
+      message.innerHTML = "Đã xóa toàn bộ user";
+      message.className = "message-box success";
+      saved.innerHTML = "";
+      saved.className = "hidden";
+      form.reset();
+    });
+  </script>
+</body>
+</html>

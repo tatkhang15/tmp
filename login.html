@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <p id="message" class="message-box hidden"></p>
+  <div class="container">
+    <h1>Đăng nhập</h1>
+    <form id="form">
+      <label for="username">Tên đăng nhập</label>
+      <input type="text" id="username" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+      <label for="password">Mật khẩu</label>
+      <input type="password" id="password" required>
+      <button type="submit">Đăng nhập</button>
+    </form>
+    <a href="register.html" class="back-button">Quay lại đăng ký</a>
+  </div>
+  <script>
+    form = document.getElementById("form");
+    user = document.getElementById("username");
+    email = document.getElementById("email");
+    pass = document.getElementById("password");
+    message = document.getElementById("message");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      oldUser = localStorage.getItem("username");
+      oldEmail = localStorage.getItem("email");
+      oldPass = localStorage.getItem("password");
+
+      if (user.value == oldUser && email.value == oldEmail && pass.value == oldPass) {
+        message.innerHTML = "Đăng nhập thành công";
+        message.className = "message-box success";
+      } else {
+        message.innerHTML = "Sai tên đăng nhập, email hoặc mật khẩu";
+        message.className = "message-box error";
+      }
+    });
+  </script>
+</body>
+</html>
